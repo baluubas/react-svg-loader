@@ -16,11 +16,13 @@ export function optimize(opts: any = {}): string => Promise<string> {
 
 // Babel Transform
 export function transform({
-  jsx = false
-}: { jsx: boolean } = {}): string => string {
-  return content =>
+  jsx = false,
+  filename
+}: { jsx: boolean, filename: string } = {}): string => string {
+  return (content) =>
     babelTransform(content, {
       babelrc: false,
+      filename: filename,
       presets: [jsx ? void 0 : "@babel/preset-react"].filter(Boolean),
       plugins: [require.resolve("@babel/plugin-syntax-jsx"), plugin]
     });

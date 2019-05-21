@@ -11,7 +11,7 @@ export default function(content: string) {
 
   Promise.resolve(String(content))
     .then(optimize(loaderOpts.svgo))
-    .then(transform({ jsx: loaderOpts.jsx }))
+    .then(transform({ jsx: loaderOpts.jsx, filename: this.resourcePath }))
     .then((result: BabelFileResult) => cb(null, result.code))
     .catch(err => cb(err));
 }
